@@ -8,6 +8,9 @@
 
 int MPI_BinomialColectiva()
 {
+  //TODO Comprobar que los errores se gestionan adecuadamente.
+  
+  MPI_Send()
   // Implementación de colectiva en árbol binomial, implementación que
   // denominaremos MPI BinomialColectiva, a utilizar SOLO en la
   // distribución de n y L.
@@ -16,6 +19,7 @@ int MPI_BinomialColectiva()
 
 int MPI_FlattreeColectiva()
 {
+  //TODO Comprobar que los errores se gestionan adecuadamente.
   //   Posteriormente introducción de implementación propia de colectiva
   // SOLO para la recolección de count, inicialmente utilizando las
   // mismas operaciones de Send/Recv que en la implementación sin
