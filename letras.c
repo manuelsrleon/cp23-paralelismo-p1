@@ -88,24 +88,9 @@ int main(int argc, char *argv[])
 
   Mensaje bufer_envio = {n, L};
   Mensaje bufer_recepcion;
-  if (world_rank == 0)
-  {
-
-    for (int i = 1; i < world_size; i++)
-    {
-      if (v)
-        printf("PROCESO 0: Enviando n y L al proceso %d\n", i);
-      MPI_Send(&bufer_envio, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
-    }
-  }
-  else
-  {
-    if (v)
-      printf("PROCESO %d: Esperando recepción de n y L\n", world_rank);
-    MPI_Recv(&bufer_recepcion, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-    if (v)
-      printf("PROCESO %d: n y L han sido recibidas\n", world_rank);
-  }
+  if (v && world_rank == 0)
+    printf("PROCESO %d: Enviando n = %d y la letra %c a los demás procesos mediante colectiva.\n", world_rank, n, L);
+  MPI_Bcast(&bufer_envio, 2, MPI_2INT, 0 ,MPI_COMM_WORLD);
 
   cadena = (char *)malloc(n * sizeof(char));
   // Crea una cadena de tamaño n
@@ -122,24 +107,13 @@ int main(int argc, char *argv[])
     }
   }
   int count_recepcion;
+  int sum;
 
-  if (world_rank == 0)
-  {
-    int sum = count;
-    for (int i = 1; i < world_size; i++)
-    {
-      if (v)
-        printf("PROCESO %d: Recibiendo de PROCESO %d\n", world_rank, i);
-      MPI_Recv(&count_recepcion, 1, MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-      sum += count_recepcion;
-    }
-    printf("PROCESO %d: El numero de apariciones de la letra %c es %d\n", world_rank, L, sum);
-  }
-  else
-  {
-    if (v)
-      printf("PROCESO %d: Enviando conteo a proceso 0\n", world_rank);
-    MPI_Send(&count, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
+  if (v && world_rank == 0)
+    printf("PROCESO %d: Recuperando la suma de los conteos entre los procesos mediante MPI_Reduce.\n", world_rank);
+  MPI_Reduce(&count, &sum, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
+  if(world_rank == 0){
+    printf("PROCESO 0: La letra %c aparece %d veces\n",L,sum);
   }
   free(cadena);
   MPI_Finalize();
