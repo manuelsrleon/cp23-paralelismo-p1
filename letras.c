@@ -6,15 +6,44 @@
 
 // Inicialmente operaciones colectivas estándar de MPI
 
-int MPI_BinomialColectiva()
+int MPI_BinomialColectiva(void *buffer, int count, MPI_Datatype datatype, int root, MPI_Comm comm)
 {
   //TODO Comprobar que los errores se gestionan adecuadamente.
+  //int MPI_Bcast(void *buffer, int count, MPI_Datatype datatype,
+  //              int root, MPI_Comm comm)
+  /*MPI_Send(&bufer_envio, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
+    MPI_Recv(&bufer_recepcion, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);*/
+  //TODO implementar gestión de errores
+  int comm_size = 0;
+  //TODO Gestionar comm nulo? 
   
-  MPI_Send()
+  MPI_Comm_size(comm, &size);
+
+
+  for(int i = 0; (pow(2,i)-1) < comm_size-1; i++){
+    int source = -1;
+
+    if(rank ){
+      for(int i = 0; i < myrank+pow())
+        if(v)
+          printf("PROCESO %d: Enviando n = %d y L = %c a PROCESO %d", myrank, n, L, target)
+        MPI_Send(&bufer_envio, 1, MPI_INT, target, 0, MPI_COMM_WORLD);
+      }
+    }else{
+      source = pow(2,i)-1;
+      if(v)
+          printf("PROCESO %d: Esperando a recibir datos de PROCESO %d", myrank, source)
+      for(int i = 0; i < ){
+        MPI_Recv(&bufer_recepcion, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+                  
+      }
+    }
+
+  
   // Implementación de colectiva en árbol binomial, implementación que
   // denominaremos MPI BinomialColectiva, a utilizar SOLO en la
   // distribución de n y L.
-  // TODO implement
+
 }
 
 int MPI_FlattreeColectiva()
