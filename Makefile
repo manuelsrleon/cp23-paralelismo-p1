@@ -5,7 +5,7 @@ LIBS=
 PROGS=letras
 
 all: $(PROGS)
-	$(CC) $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) -c $< -lm
 run: run100
 
 run100: run100A run100C run100G run100T
