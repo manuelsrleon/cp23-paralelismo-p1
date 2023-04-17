@@ -6,30 +6,7 @@
 
 // Inicialmente operaciones colectivas estándar de MPI
 
-int MPI_BinomialColectiva()
-{
-  //TODO Comprobar que los errores se gestionan adecuadamente.
-  
-  MPI_Send()
-  // Implementación de colectiva en árbol binomial, implementación que
-  // denominaremos MPI BinomialColectiva, a utilizar SOLO en la
-  // distribución de n y L.
-  // TODO implement
-}
 
-int MPI_FlattreeColectiva()
-{
-  //TODO Comprobar que los errores se gestionan adecuadamente.
-  //   Posteriormente introducción de implementación propia de colectiva
-  // SOLO para la recolección de count, inicialmente utilizando las
-  // mismas operaciones de Send/Recv que en la implementación sin
-  // colectivas (bucle for de Recv), implementación que denominaremos
-  // MPI FlattreeColectiva. Asumir que la operación a realizar será una
-  // suma. El resto de parámetros de la cabecera deben ser los mismos
-  // que los de la colectiva estándar de MPI (incluido controlar el error).
-
-  // TODO implement
-}
 void inicializaCadena(char *cadena, int n)
 {
   int i;
@@ -110,7 +87,6 @@ int main(int argc, char *argv[])
       count++;
     }
   }
-  int count_recepcion;
   int sum;
 
   if (v && world_rank == 0)
